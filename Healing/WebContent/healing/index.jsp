@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,7 +47,7 @@
 
 
 	<div class="mbr-table-cell">
-			<div class="container">
+		<div class="container">
 			<button class="navbar-toggler pull-xs-right hidden-md-up"
 				type="button" data-toggle="collapse"
 				data-target="#exCollapsingNavbar">
@@ -56,11 +57,10 @@
 			<ul
 				class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm"
 				id="exCollapsingNavbar">
-				<li class="nav-item"><a class="nav-link link"
-					href="#">Music</a></li>
+				<li class="nav-item"><a class="nav-link link" href="#">Music</a></li>
 				<li class="nav-item nav-btn"><a
 					class="nav-link btn btn-white btn-white-outline"
-					href="/Healing/healing/login.jsp">LOGIN</a></li>
+					href="/Healing/index?path=login.jsp">LOGIN</a></li>
 			</ul>
 			<button hidden="" class="navbar-toggler navbar-close" type="button"
 				data-toggle="collapse" data-target="#exCollapsingNavbar">
@@ -69,21 +69,26 @@
 		</div>
 
 		<div class="container">
-			<div class="row">
-				<div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
+			<c:choose>
+				<c:when test="${sessionScope.include.equals(\"main\") }">
+					<jsp:include page="main.jsp" />
+				</c:when>
+				<c:when test="${sessionScope.include.equals(\"coloring\") }">
+					<jsp:include page="coloring.jsp" />
+				</c:when>
+				<c:when test="${sessionScope.include.equals(\"login\") }">
+					<jsp:include page="login.jsp" />
+				</c:when>
+				<c:otherwise>
+					<jsp:include page="main.jsp" />
+				</c:otherwise>
+			</c:choose>
 
-					<h1 class="mbr-section-title display-1">The Healing Time</h1>
-					<p class="mbr-section-lead lead">
-						Please relieve stress on our site today. <br>You need a break
-						for a happy tomorrow. <br>Use coloring, anonymous bulletin
-						boards, and professional counseling<br> to find your peace of
-						mind.
-					</p>
-				</div>
-			</div>
+
+
 			<div class="mbr-section-btn">
 				<a class="btn btn-lg btn-white btn-white-outline"
-					href="/Healing/healing/coloring.jsp">Coloring</a> <a
+					href="/Healing/index?path=coloring">Coloring</a> <a
 					class="btn btn-lg btn-white btn-white-outline"
 					href="https://mobirise.com">Anonymous</a> <a
 					class="btn btn-lg btn-white btn-white-outline"
